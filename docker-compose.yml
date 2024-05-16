@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16.3
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    networks:
+      - postgresN
+    volumes:
+      - db-data:/etc/data
+  app:
+    build:
+      context: .
+      dockerfile: ./nestjs-database-messages/Dockerfile
+    depends_on:
+      - postgres
+    networks:
+      - postgresN
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+
+networks:
+  postgresN:
+volumes:
+  db-data:
