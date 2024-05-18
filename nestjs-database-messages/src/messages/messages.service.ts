@@ -12,42 +12,50 @@ export class MessagesService {
     private messageRepository: Repository<MessageModel>,
   ) {}
 
-  async create(message: MessageDto) {
+  async create(message: MessageDto, email: string) {
     const newMessage: MessageModel = {
       text: message.text,
       title: message.title,
       id: randomUUID(),
+      userEmail: email,
     };
     return await this.messageRepository.save(newMessage);
   }
 
-  async findAll() {
-    return await this.messageRepository.find();
-  }
-
-  async delete(id: string) {
-    return await this.messageRepository.delete({
-      id,
+  async findAll(email: string) {
+    return await this.messageRepository.find({
+      where: {
+        userEmail: email,
+      },
     });
   }
 
-  async findOne(id: string) {
+  async delete(id: string, email: string) {
+    return await this.messageRepository.delete({
+      id,
+      userEmail: email,
+    });
+  }
+
+  async findOne(id: string, email: string) {
     return await this.messageRepository.findOne({
       where: {
         id,
+        userEmail: email,
       },
     });
   }
 
-  async findByTitle(body: { title: string }) {
+  async findByTitle(body: { title: string }, email: string) {
     return await this.messageRepository.find({
       where: {
         title: body.title,
+        userEmail: email,
       },
     });
   }
 
-  async patchMessage(id: string, dto: MessageDto) {
-    return await this.messageRepository.update({ id }, dto);
+  async patchMessage(id: string, dto: MessageDto, email: string) {
+    return await this.messageRepository.update({ id, userEmail: email }, dto);
   }
 }

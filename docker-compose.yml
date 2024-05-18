@@ -21,7 +21,7 @@ services:
     networks:
       - postgresN
     ports:
-      - ${BACKEND_PORT}:${BACKEND_PORT}
+      - ${REACT_APP_BACKEND_PORT}:${REACT_APP_BACKEND_PORT}
 
 networks:
   postgresN:

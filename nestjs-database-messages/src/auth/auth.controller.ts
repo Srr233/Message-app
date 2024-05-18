@@ -9,6 +9,7 @@ import {
 import { AuthDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
 import { USER_EXISTS } from './auth.constants';
+import { PayloadLogin } from './interfaces/payloadLogin';
 
 @Controller('auth')
 export class AuthController {
@@ -24,7 +25,10 @@ export class AuthController {
   @Post('login')
   @HttpCode(200)
   async login(@Body() { login, password }: AuthDto) {
-    const { email } = await this.authService.validateUser(login, password);
-    return this.authService.login(email);
+    const payload: PayloadLogin = await this.authService.validateUser(
+      login,
+      password,
+    );
+    return this.authService.login(payload);
   }
 }

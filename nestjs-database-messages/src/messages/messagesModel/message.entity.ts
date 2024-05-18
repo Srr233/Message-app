@@ -10,4 +10,7 @@ export class MessageModel {
 
   @Column()
   text: string;
+
+  @Column()
+  userEmail: string;
 }
