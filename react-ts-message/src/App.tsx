@@ -1,8 +1,9 @@
 import "./App.css";
 import { Header } from "./components/header/Header";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { Register } from "./components/register/Register";
 import { AnimatedBlock } from "./components/animate/AnimateBackground";
+import { FormEnter } from "./components/form/Form";
+import { loginOptions, registerOptions } from "./contents/loginRegisterContent";
 
 const App = () => {
   return (
@@ -10,7 +11,11 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<FormEnter {...loginOptions} />} />
+          <Route
+            path="/register"
+            element={<FormEnter {...registerOptions} />}
+          />
         </Routes>
         <AnimatedBlock />
       </BrowserRouter>

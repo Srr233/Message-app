@@ -1,10 +1,12 @@
 import React, { ChangeEvent, Component } from "react";
 import { EnterLoginPass } from "../../interfaces/EnterLoginPass";
-import { BACKEND_URL } from "../../constants";
-import { createReadStream } from "fs";
-import { Link } from "react-router-dom";
+import { EnterRequest } from "../../interfaces/EnterRequest";
+import { FormInfo } from "../../interfaces/FormInfo";
 
-export class Register extends Component<{}, EnterLoginPass> {
+export class FormEnter extends Component<
+  EnterRequest & FormInfo,
+  EnterLoginPass
+> {
   state = {
     login: "",
     password: "",
@@ -25,40 +27,15 @@ export class Register extends Component<{}, EnterLoginPass> {
       password: value,
     });
   };
-
-  sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    const { login, password } = this.state;
-    try {
-      const response = await (
-        await fetch(`${BACKEND_URL}/api/auth/register`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ login, password }),
-        })
-      ).json();
-
-      alert(
-        JSON.stringify({
-          response,
-        })
-      );
-    } catch (e: any) {
-      console.log(e);
-    }
-  };
   render() {
     const { login, password } = this.state;
+    const { requestFunc, actionTitle, buttonText, textAction } = this.props;
 
     return (
       <div className="wrapper">
         <div className="register__wrapper">
-          <h2>Create account</h2>
-          <span>
-            Already have an account? <Link to="/login">Sign in</Link>
-          </span>
+          <h2>{actionTitle}</h2>
+          <span>{textAction}</span>
           <form className="register__form">
             <label htmlFor="Login">
               <span>Login</span>
@@ -78,7 +55,9 @@ export class Register extends Component<{}, EnterLoginPass> {
                 placeholder="Password"
               />
             </label>
-            <button onClick={this.sendData}>Sign up</button>
+            <button onClick={(e) => requestFunc(e, login, password)}>
+              {buttonText}
+            </button>
           </form>
         </div>
       </div>
