@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NoteProperties } from "../../interfaces/noteComponent/NoteProperties.interface";
 import { Note, PrevState } from "../../interfaces/Note.interface";
 import { patchNote, deleteCurrentNote } from "../../services/requests";
+import { ENTER_KEY } from "../../constants";
 
 export class NoteComponent extends Component<
   NoteProperties,
@@ -24,6 +25,10 @@ export class NoteComponent extends Component<
     event.stopPropagation();
     this.props.selectNote(null);
     this.mainRef.current?.classList.remove("openedClass");
+  };
+
+  updateByPressing = (event?: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event?.code === ENTER_KEY) this.updateNote();
   };
 
   updateNote = async () => {
@@ -83,12 +88,14 @@ export class NoteComponent extends Component<
             className="note__title"
             value={this.state.title}
             onChange={this.handleChange}
+            onKeyUp={this.updateByPressing}
           />
           <textarea
             name="text"
             className="note__text"
             value={this.state.text}
             onChange={this.handleChange}
+            onKeyUp={this.updateByPressing}
           />
         </>
       );
