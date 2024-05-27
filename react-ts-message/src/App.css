@@ -28,6 +28,10 @@ body {
   font-family: "Open Sans";
 }
 
+.visibility {
+  visibility: hidden;
+}
+
 #root {
 }
 
@@ -52,7 +56,7 @@ header {
   display: flex;
   width: 100%;
   justify-content: center;
-  height: 100px;
+  height: 10vh;
 }
 
 header h1 {
@@ -148,4 +152,152 @@ header nav ul li {
 .register__form label {
   display: flex;
   flex-direction: column;
+}
+
+.dashboard__wrapper {
+  position: relative;
+  height: 80vh;
+  z-index: 15;
+  padding: 0 20px 0 20px;
+  background-color: #fff;
+}
+
+.dashboard__panel {
+  display: flex;
+  height: 100%;
+}
+
+.dashboard__workflow__wrapper {
+  width: 100%;
+}
+
+.dashboard__notes__wrapper {
+  padding: 0 10px 0 10px;
+  margin: 0 10px 0 10px;
+  width: 100%;
+  background-color: #e3e3e3;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+}
+
+.note__button__addNew {
+  width: 70px;
+  height: 70px;
+}
+
+.note__wrapper {
+  padding: 5px;
+  box-shadow: 0 0 3px dimgray;
+  margin: 10px;
+  background-color: #fff;
+  height: fit-content;
+}
+
+.note__wrapper:hover {
+  cursor: pointer;
+  box-shadow: 0 0 7px dimgray;
+}
+
+.note {
+  height: 100%;
+}
+
+.note button {
+  visibility: hidden;
+}
+
+.note__content {
+  display: flex;
+  flex-direction: column;
+  height: 190px;
+  width: 190px;
+}
+
+.note__content h3 {
+  font-size: 16px;
+  height: 30%;
+  word-break: break-word;
+  white-space: wrap;
+  overflow-y: auto;
+}
+.note__content p {
+  font-size: 14px;
+  height: 70%;
+  overflow-y: auto;
+  margin-top: 5px;
+  white-space: wrap;
+  word-break: break-word;
+}
+.note__content textarea {
+  resize: none;
+  margin: 5px;
+}
+
+.note__content textarea:nth-child(1) {
+  height: 25px;
+}
+
+.note__content textarea:nth-child(2) {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.dashboard__list {
+  background-color: #fff;
+  width: 20%;
+  min-width: 20%;
+}
+
+.dashboard__list input {
+  width: 80%;
+  margin: 5% auto 5% auto;
+}
+
+.dashboard__list li {
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+.dashboard__list ul {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 90%;
+}
+
+.dashboard__list li:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.noteListChoosen {
+  font-weight: bold;
+}
+
+.openedClass {
+  position: absolute;
+  z-index: 25;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.openedClass button {
+  visibility: visible !important;
+}
+
+.noAccess {
+  position: relative;
+  z-index: 25 !important;
+  height: 80vh;
+  background-color: #3c3c3c;
+}
+
+.noAccess p {
+  padding: 50px 10px 50px 10px;
+  font-size: 40px;
+}
+
+.noAccess a:hover {
+  border-bottom: 1px solid #dddddd;
 }
