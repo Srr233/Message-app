@@ -4,4 +4,5 @@ export interface WorkflowState {
   currentNoteId: string | null;
   notes: Note[];
   NewNoteComponentBlockOpened: boolean;
+  searchText: string;
 }

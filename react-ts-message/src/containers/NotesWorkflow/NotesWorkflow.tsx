@@ -11,6 +11,7 @@ export class NotesWorkflow extends Component<{}, WorkflowState> {
     NewNoteComponentBlockOpened: false,
     notes: [],
     currentNoteId: null,
+    searchText: "",
   };
   componentDidMount = async () => {
     this.setState({
@@ -35,6 +36,11 @@ export class NotesWorkflow extends Component<{}, WorkflowState> {
     }));
   };
 
+  private searchByTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.stopPropagation();
+    const { value } = event.currentTarget;
+    this.setState({ searchText: value });
+  };
   render(): React.ReactNode {
     const { notes } = this.state;
 
@@ -45,11 +51,13 @@ export class NotesWorkflow extends Component<{}, WorkflowState> {
             type="text"
             className="dashboard__search"
             placeholder="&#128269;"
+            onChange={this.searchByTitle}
           />
           <List
             notes={notes as ListProps[]}
             selectNote={this.selectNote}
             currentNoteId={this.state.currentNoteId}
+            searchText={this.state.searchText}
           />
         </div>
 

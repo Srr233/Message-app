@@ -6,4 +6,6 @@ export interface ListProps {
 export interface ListOptions {
   notes: ListProps[];
   selectNote: (id: string) => void;
+  currentNoteId: string | null;
+  searchText: string;
 }

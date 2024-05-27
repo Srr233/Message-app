@@ -1,11 +1,10 @@
 import { Component, ReactNode } from "react";
-import { ListOptions } from "../../interfaces/list/ListProps.interface";
-import { WorkflowState } from "../../interfaces/workflow/WorkflowState.interface";
+import {
+  ListOptions,
+  ListProps,
+} from "../../interfaces/list/ListProps.interface";
 
-export class List extends Component<
-  ListOptions & Pick<WorkflowState, "currentNoteId">,
-  {}
-> {
+export class List extends Component<ListOptions, {}> {
   handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
     event.preventDefault();
     this.props.selectNote(
@@ -13,13 +12,20 @@ export class List extends Component<
     );
   };
   render(): ReactNode {
-    const { currentNoteId } = this.props;
-    if (!this.props.notes.length) return;
+    const { currentNoteId, searchText } = this.props;
     const { notes } = this.props;
-    const list = notes.map((l, i) => {
+    let resultNotes: ListProps[] = notes;
+    if (!notes.length) return;
+    if (searchText)
+      resultNotes = notes.filter((v) => {
+        return v.title
+          .toLowerCase()
+          .match(new RegExp("^" + searchText.toLowerCase(), "g"));
+      });
+    const list = resultNotes.map((l) => {
       return (
         <li
-          key={i}
+          key={l.id}
           data-id={l.id}
           onClick={this.handleClick}
           className={currentNoteId === l.id ? "noteListChoosen" : ""}
