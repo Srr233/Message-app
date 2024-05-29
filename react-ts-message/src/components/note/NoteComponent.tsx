@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NoteProperties } from "../../interfaces/noteComponent/NoteProperties.interface";
 import { Note, PrevState } from "../../interfaces/Note.interface";
 import { patchNote, deleteCurrentNote } from "../../services/requests";
-import { ENTER_KEY } from "../../constants";
+import { ENTER_KEY, QUESTION_BEFORE_DELETE } from "../../constants";
 
 export class NoteComponent extends Component<
   NoteProperties,
@@ -45,6 +45,8 @@ export class NoteComponent extends Component<
   };
 
   deleteNote = async () => {
+    const answer = window.confirm(QUESTION_BEFORE_DELETE);
+    if (!answer) return;
     const { id } = this.props.note;
     await deleteCurrentNote(id);
     this.props.deleteNote(id);
