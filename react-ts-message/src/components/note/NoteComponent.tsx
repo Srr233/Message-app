@@ -40,14 +40,7 @@ export class NoteComponent extends Component<
 
     const response: Note = await patchNote(note);
 
-    const newState: Note & PrevState = {
-      ...response,
-      prevState: {
-        ...response,
-      },
-    };
-
-    this.setState(newState);
+    this.props.updateNote(response);
     this.props.selectNote(null);
   };
 

@@ -12,14 +12,17 @@ export class Notes extends Component<
   };
 
   render(): ReactNode {
-    return this.props.notes.map((note) => {
+    const { deleteNote, selectNote, updateNote, currentNoteId, notes } =
+      this.props;
+    return notes.map((note) => {
       return (
         <NoteComponent
+          updateNote={updateNote}
           key={note.id}
-          deleteNote={this.props.deleteNote}
-          selectNote={this.props.selectNote}
+          deleteNote={deleteNote}
+          selectNote={selectNote}
           note={note}
-          currentNoteId={this.props.currentNoteId}
+          currentNoteId={currentNoteId}
         />
       );
     });

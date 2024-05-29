@@ -5,6 +5,7 @@ import { getAllMessages } from "../../services/requests";
 import { NewNoteComponent } from "../../components/note/NewNoteComponent";
 import { WorkflowState } from "../../interfaces/workflow/WorkflowState.interface";
 import { Notes } from "../../components/note/Notes";
+import { Note } from "../../interfaces/Note.interface";
 
 export class NotesWorkflow extends Component<{}, WorkflowState> {
   state: Readonly<WorkflowState> = {
@@ -27,6 +28,12 @@ export class NotesWorkflow extends Component<{}, WorkflowState> {
 
   private selectNote = (id: string | null) => {
     this.setState({ currentNoteId: id });
+  };
+
+  private updateNote = (note: Note) => {
+    this.setState(({ notes }) => ({
+      notes: notes.map((v) => (v.id === note.id ? note : v)),
+    }));
   };
 
   private deleteNote = (id: string | null) => {
@@ -86,6 +93,7 @@ export class NotesWorkflow extends Component<{}, WorkflowState> {
           )}
           {
             <Notes
+              updateNote={this.updateNote}
               currentNoteId={this.state.currentNoteId}
               deleteNote={this.deleteNote}
               notes={this.state.notes}
