@@ -17,11 +17,13 @@ export class Dashboard extends Component<{}, { access: string | null }> {
     }
 
     return (
-      <div className="wrapper">
-        <div className="dashboard__wrapper">
-          <div className="dashboard__panel">
-            <div className="dashboard__workflow__wrapper">
-              <NotesWorkflow />
+      <div className="main__wrapper">
+        <div className="wrapper">
+          <div className="dashboard__wrapper">
+            <div className="dashboard__panel">
+              <div className="dashboard__workflow__wrapper">
+                <NotesWorkflow />
+              </div>
             </div>
           </div>
         </div>

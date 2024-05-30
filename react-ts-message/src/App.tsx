@@ -5,6 +5,7 @@ import { AnimatedBlock } from "./components/animate/AnimateBackground";
 import { FormEnter } from "./components/form/Form";
 import { loginOptions, registerOptions } from "./contents/loginRegisterContent";
 import { Dashboard } from "./containers/Dashboard/Dashboard";
+import { Footer } from "./components/footer/Footer";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <AnimatedBlock />
+        <Footer />
       </BrowserRouter>
     </>
   );
