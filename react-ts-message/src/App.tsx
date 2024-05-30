@@ -14,10 +14,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/login" element={<FormEnter {...loginOptions} />} />
-          <Route
-            path="/register"
-            element={<FormEnter {...registerOptions} />}
-          />
+          <Route path="/" element={<FormEnter {...registerOptions} />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <AnimatedBlock />
