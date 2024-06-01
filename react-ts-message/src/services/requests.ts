@@ -1,14 +1,12 @@
 import { BACKEND_URL } from "../constants";
 import { Note } from "../interfaces/Note.interface";
 
-const AUTH_TOKEN = "bearer " + localStorage.getItem("access_token");
 export const getAllMessages = async () => {
   const request = await fetch(`${BACKEND_URL}/api/messages`, {
     headers: {
-      Authorization: AUTH_TOKEN,
+      Authorization: "bearer " + localStorage.getItem("access_token"),
     },
   });
-  if (request.status !== 200) return [];
   return await request.json();
 };
 
@@ -17,7 +15,7 @@ export const patchNote = async (note: Note): Promise<Note> => {
     `${BACKEND_URL}/api/messages/message/update/${note.id}`,
     {
       headers: {
-        Authorization: AUTH_TOKEN,
+        Authorization: "bearer " + localStorage.getItem("access_token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(note),
@@ -36,7 +34,7 @@ export const deleteCurrentNote = async (
 ): Promise<{ affected: number }> => {
   const request = await fetch(`${BACKEND_URL}/api/messages/delete/${id}`, {
     headers: {
-      Authorization: AUTH_TOKEN,
+      Authorization: "bearer " + localStorage.getItem("access_token"),
     },
     method: "DELETE",
   });
@@ -49,7 +47,7 @@ export const deleteCurrentNote = async (
 export const createNewNoteF = async (note: Omit<Note, "id">): Promise<Note> => {
   const request = await fetch(`${BACKEND_URL}/api/messages/create`, {
     headers: {
-      Authorization: AUTH_TOKEN,
+      Authorization: "bearer " + localStorage.getItem("access_token"),
       "Content-Type": "application/json",
     },
     method: "POST",
@@ -57,4 +55,12 @@ export const createNewNoteF = async (note: Omit<Note, "id">): Promise<Note> => {
   });
   if (request.status !== 201) throw new Error(await request.json());
   return await request.json();
+};
+
+export const validateUser = async () => {
+  return await fetch(`${BACKEND_URL}/api/messages`, {
+    headers: {
+      Authorization: "bearer " + localStorage.getItem("access_token"),
+    },
+  });
 };

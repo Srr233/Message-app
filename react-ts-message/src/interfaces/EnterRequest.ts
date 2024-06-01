@@ -3,5 +3,5 @@ export interface EnterRequest {
     event: React.MouseEvent<HTMLButtonElement>,
     login: string,
     password: string
-  ) => Promise<void>;
+  ) => Promise<boolean>;
 }

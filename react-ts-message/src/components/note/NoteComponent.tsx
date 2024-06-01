@@ -28,7 +28,7 @@ export class NoteComponent extends Component<
   };
 
   updateByPressing = (event?: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event?.code === ENTER_KEY) this.updateNote();
+    if (event?.code === ENTER_KEY && event?.ctrlKey) this.updateNote();
   };
 
   updateNote = async () => {
@@ -40,6 +40,7 @@ export class NoteComponent extends Component<
 
     const response: Note = await patchNote(note);
 
+    this.setState({ text: note.text, title: note.title, prevState: note });
     this.props.updateNote(response);
     this.props.selectNote(null);
   };

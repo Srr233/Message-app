@@ -29,8 +29,10 @@ export const registerOptions: EnterRequest & FormInfo = {
           response,
         })
       );
+      return false; // crutch to set logged user
     } catch (e: any) {
       console.log(e);
+      return false; // crutch
     }
   },
 };
@@ -38,11 +40,11 @@ export const registerOptions: EnterRequest & FormInfo = {
 export const loginOptions: EnterRequest & FormInfo = {
   actionTitle: "Sign in",
   buttonText: "Sign in",
-  requestFunc: async (event, login, password) => {
+  requestFunc: async (event, login, password): Promise<boolean> => {
     event.preventDefault();
 
     try {
-      const responseData = await await fetch(`${BACKEND_URL}/api/auth/login`, {
+      const responseData = await fetch(`${BACKEND_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -51,15 +53,17 @@ export const loginOptions: EnterRequest & FormInfo = {
       });
       if (responseData.status !== 200) {
         alert(responseData.statusText);
-        return;
+        return false;
       }
 
       const responseJson = await responseData.json();
       const { access_token } = responseJson;
       localStorage.setItem("access_token", access_token);
       alert("Good! Now go to dashboard!");
+      return true;
     } catch (e: any) {
       console.log(e);
+      return false;
     }
   },
 };

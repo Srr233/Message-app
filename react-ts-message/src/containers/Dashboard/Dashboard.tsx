@@ -1,8 +1,12 @@
 import { Component } from "react";
 import { NotesWorkflow } from "../NotesWorkflow/NotesWorkflow";
 import { Link } from "react-router-dom";
+import { IsLogged } from "../../interfaces/IsLogged";
 
-export class Dashboard extends Component<{}, { access: string | null }> {
+export class Dashboard extends Component<
+  Pick<IsLogged, "isLogged">,
+  { access: string | null }
+> {
   render() {
     const accesToken = localStorage.getItem("access_token");
     if (!accesToken) {

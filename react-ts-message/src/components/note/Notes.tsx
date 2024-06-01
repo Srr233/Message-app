@@ -14,6 +14,8 @@ export class Notes extends Component<
   render(): ReactNode {
     const { deleteNote, selectNote, updateNote, currentNoteId, notes } =
       this.props;
+
+    if (!notes) return <div className="loading">LOADING</div>;
     return notes.map((note) => {
       return (
         <NoteComponent

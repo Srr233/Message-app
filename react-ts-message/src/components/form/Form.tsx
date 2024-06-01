@@ -2,9 +2,10 @@ import React, { ChangeEvent, Component } from "react";
 import { EnterLoginPass } from "../../interfaces/EnterLoginPass";
 import { EnterRequest } from "../../interfaces/EnterRequest";
 import { FormInfo } from "../../interfaces/FormInfo";
+import { IsLogged } from "../../interfaces/IsLogged";
 
 export class FormEnter extends Component<
-  EnterRequest & FormInfo,
+  EnterRequest & FormInfo & Pick<IsLogged, "setLoggedStatus">,
   EnterLoginPass
 > {
   state = {
@@ -27,9 +28,19 @@ export class FormEnter extends Component<
       password: value,
     });
   };
+
+  signIn = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    login: string,
+    password: string
+  ): Promise<void> => {
+    const result = await this.props.requestFunc(e, login, password);
+    this.props.setLoggedStatus(result);
+  };
+
   render() {
     const { login, password } = this.state;
-    const { requestFunc, actionTitle, buttonText, textAction } = this.props;
+    const { actionTitle, buttonText, textAction } = this.props;
 
     return (
       <div className="wrapper">
@@ -55,7 +66,7 @@ export class FormEnter extends Component<
                 placeholder="Password"
               />
             </label>
-            <button onClick={(e) => requestFunc(e, login, password)}>
+            <button onClick={(e) => this.signIn(e, login, password)}>
               {buttonText}
             </button>
           </form>
