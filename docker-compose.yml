@@ -12,7 +12,7 @@ services:
       - postgresN
     volumes:
       - db-data:/etc/data
-  app:
+  backend:
     build:
       context: .
       dockerfile: ./nestjs-database-messages/Dockerfile
@@ -23,6 +23,14 @@ services:
     ports:
       - ${REACT_APP_BACKEND_PORT}:${REACT_APP_BACKEND_PORT}
 
+  client:
+    build:
+      context: .
+      dockerfile: ./react-ts-message/Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - ${PORT}:${PORT}
 networks:
   postgresN:
 volumes:

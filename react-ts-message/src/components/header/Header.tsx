@@ -14,9 +14,6 @@ export class Header extends Component<Pick<IsLogged, "isLogged">, {}> {
                   <li>
                     <NavLink to="/">DASHBOARD</NavLink>
                   </li>
-                  <li>
-                    <NavLink to="/about_me">ABOUT ME</NavLink>
-                  </li>
                 </>
               ) : (
                 <>
@@ -28,9 +25,6 @@ export class Header extends Component<Pick<IsLogged, "isLogged">, {}> {
                   </li>
                   <li>
                     <NavLink to="/dashboard">DASHBOARD</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/about_me">ABOUT ME</NavLink>
                   </li>
                 </>
               )}

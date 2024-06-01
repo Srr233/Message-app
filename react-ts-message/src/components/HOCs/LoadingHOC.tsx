@@ -11,7 +11,7 @@ export const LoadingHOC =
         return isUserLogged(this.props[loadingProp]) ? (
           <WrappedComponent {...this.props} />
         ) : (
-          <div className="loader">LOADING</div>
+          <span className="loader"></span>
         );
       }
     };
