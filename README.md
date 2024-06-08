@@ -15,5 +15,5 @@
 ## USE
 - npm install in "nestjs-database-messages" and "react-ts-message".
 - ./{currentPath} Docker-compose up
-
+- go to http://localhost:3000
 ![An Example](image.png)
